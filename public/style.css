@@ -173,16 +173,30 @@ h1 {
 }
 
 @media (min-width: 769px) {
+
+    /* Ensure nav actions (Login/Join) are visible on desktop */
     .nav-actions {
+        display: flex !important;
+    }
+
+    .mobile-toggle {
         display: none;
-        /* Hide actions container on desktop since we moved buttons to links, unless toggle is needed? No toggle is hidden by css. */
     }
 }
 
 @media (max-width: 768px) {
+
+    .nav-links.desktop-only,
+    .nav-actions .desktop-only {
+        display: none !important;
+    }
+
+    .mobile-toggle {
+        display: block;
+    }
+
     .nav-actions {
         display: flex;
-        /* Show for mobile toggle */
     }
 }
 
