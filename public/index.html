@@ -262,6 +262,43 @@
       });
     });
   </script>
+  <script>
+    // Stats Count-up Animation
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counter = entry.target;
+          const target = +counter.getAttribute('data-target');
+          const duration = 2000; // 2 seconds
+          const increment = target / (duration / 16); // 60fps
+
+          let current = 0;
+          const updateCounter = () => {
+            current += increment;
+            if (current < target) {
+              counter.innerText = Math.ceil(current) + (target > 100 ? '+' : '');
+              requestAnimationFrame(updateCounter);
+            } else {
+              counter.innerText = target + (target > 100 ? '+' : '');
+            }
+          };
+
+          updateCounter();
+          observer.unobserve(counter);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.stat-number').forEach(counter => {
+      observer.observe(counter);
+    });
+  </script>
 </body>
 
 </html>
