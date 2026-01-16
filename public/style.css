@@ -456,6 +456,29 @@ h1 {
         display: flex;
         justify-content: center;
     }
+
+    .hero-stats {
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-violet) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    /* Standard prop */
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-description {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    max-width: 600px;
 }
 
 /* Button Base for glow-button (aliasing to btn if needed or defining new) */
