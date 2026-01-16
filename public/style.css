@@ -166,6 +166,12 @@ h1 {
     /* Container padding handled by navbar */
 }
 
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
 /* Logo Adjustment */
 .logo {
     font-size: 1.25rem;
