@@ -259,9 +259,19 @@
       document.getElementById('loginView').style.display = 'none';
       document.getElementById('dashboardView').style.display = 'grid'; // Note: grid for layout
 
+      // Header
       document.getElementById('welcomeMsg').textContent = `Welcome back, ${user.name}`;
-      document.getElementById('userRole').textContent = user.role.toUpperCase();
-      document.getElementById('cfHandle').textContent = user.handles.codeforces || 'N/A';
+
+      // Populating Profile Card
+      document.getElementById('cardName').textContent = user.name;
+      document.getElementById('cardHandle').textContent = user.handles.codeforces ? `@${user.handles.codeforces}` : '@user';
+      document.getElementById('profileRole').textContent = user.role.toUpperCase();
+      document.getElementById('profilePhoto').src = `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.name}`;
+
+      // Platform Ratings (Placeholder/Real)
+      document.getElementById('cardCFRating').textContent = user.ratings?.codeforces || 'N/A';
+      document.getElementById('cardCCRating').textContent = user.ratings?.codechef || 'N/A';
+      document.getElementById('cardLCRating').textContent = user.ratings?.leetcode || 'N/A';
 
       loadStats(user);
       loadMembers();
@@ -284,6 +294,10 @@
           const data = await overviewRes.json();
           document.getElementById('totalSolved').textContent = data.totalProblemsSolved || 0;
           document.getElementById('accuracy').textContent = (data.aggregatedAccuracy * 100).toFixed(1) + '%';
+
+          // Update Card Stats from API data
+          document.getElementById('cardSolved').textContent = data.totalProblemsSolved || 0;
+          // Streak and Rank would come from API too, leaving as -- for now if undefined
         }
       } catch (e) {
         console.error("Stats load fail:", e);
