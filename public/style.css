@@ -121,6 +121,15 @@ h1 {
     max-width: var(--container-width);
     margin: 0 auto;
     padding: 0 1.5rem;
+    padding: 0 1.5rem;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 100%;
 }
 
 /* --- Components: Navbar (Floating Glass) --- */
