@@ -388,6 +388,16 @@ h1 {
     overflow: hidden;
 }
 
+/* Force container to start from left in Hero */
+.hero .container {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100%;
+    padding-left: 30px;
+    /* Explicit user request */
+    padding-right: 30px;
+}
+
 .hero-content {
     max-width: 800px;
     z-index: 10;
