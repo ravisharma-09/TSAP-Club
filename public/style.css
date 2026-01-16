@@ -469,6 +469,103 @@ h1 {
     border: 1px solid rgba(6, 182, 212, 0.2);
 }
 
+/* --- Component: Leadership Card --- */
+.leader-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Bouncy effect */
+}
+
+/* Hover Lift & Glow */
+.leader-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent-cyan);
+    box-shadow: 0 15px 30px -5px rgba(6, 182, 212, 0.3);
+}
+
+.leader-header {
+    position: relative;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.profile-glow {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    padding: 3px;
+    background: var(--brand-gradient);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+}
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--bg-primary);
+    /* Visual separation */
+    background: var(--bg-secondary);
+}
+
+.role-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.75rem;
+    border-radius: 99px;
+    background: rgba(6, 182, 212, 0.15);
+    color: var(--accent-cyan);
+    border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+.leader-info h3 {
+    margin-bottom: 0.25rem;
+    font-size: 1.25rem;
+}
+
+.leader-socials {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--glass-border);
+    width: 100%;
+    justify-content: center;
+}
+
+.social-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.social-icon:hover {
+    background: rgba(6, 182, 212, 0.1);
+    color: var(--accent-cyan);
+    transform: scale(1.1) rotate(5deg);
+    border-color: rgba(6, 182, 212, 0.3);
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.2);
+}
+
 /* --- Authentication Forms --- */
 .auth-container {
     min-height: 100vh;
