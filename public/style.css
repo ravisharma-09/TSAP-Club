@@ -416,8 +416,8 @@ h1 {
     margin-left: 0;
     margin-right: 0;
     max-width: 100%;
-    padding-left: 80px;
-    /* Explicit user request "60px ++" */
+    padding-left: 75px;
+    /* Explicit user request "do 75px" */
     padding-right: 45px;
 }
 
