@@ -132,13 +132,13 @@ h1 {
     width: 95%;
     max-width: var(--container-width);
     z-index: 1000;
-    padding: 0.75rem 1.5rem;
-    background: rgba(3, 7, 18, 0.6);
-    /* Slightly more opaque for legibility */
+    padding: 0.5rem 1.25rem;
+    /* Reduced padding for sleeker look */
+    background: rgba(3, 7, 18, 0.7);
+    /* Slightly more opaque */
     backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
     border-radius: 50px;
-    /* Pillow shape for floating feel */
     box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease;
 }
@@ -154,6 +154,7 @@ h1 {
         border-top: none;
         border-left: none;
         border-right: none;
+        padding: 0.75rem 1rem;
     }
 }
 
@@ -162,8 +163,7 @@ h1 {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 0;
-    /* Container padding handled by navbar */
+    height: 100%;
 }
 
 .nav-actions {
@@ -174,7 +174,12 @@ h1 {
 
 /* Logo Adjustment */
 .logo {
-    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
 }
 
 /* Desktop Links */
@@ -373,36 +378,81 @@ h1 {
 }
 
 .hero-title {
-    font-size: 5rem;
+    font-size: 4rem;
     font-weight: 800;
-    line-height: 1;
-    margin-bottom: 1rem;
-    letter-spacing: -0.04em;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+    /* Reduced from -0.04em for cleaner look */
 }
 
 @media (min-width: 768px) {
     .hero-title {
-        font-size: 7rem;
+        font-size: 6rem;
     }
 }
 
 .hero-tagline {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: white;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.15em;
     text-shadow: 0 0 20px rgba(6, 182, 212, 0.6), 0 0 40px rgba(139, 92, 246, 0.4);
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
     background: linear-gradient(90deg, #fff, #94a3b8);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
+    /* Standard prop */
 }
 
-.hero-actions {
+.hero-buttons {
     display: flex;
-    gap: 1.5rem;
-    margin-top: 2rem;
+    gap: 1.25rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    justify-content: start;
+    /* Align left */
+}
+
+@media (max-width: 768px) {
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+        gap: 1rem;
+    }
+
+    .hero-buttons>* {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+/* Button Base for glow-button (aliasing to btn if needed or defining new) */
+.glow-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
 }
 
 .glow-effect:hover {
