@@ -335,7 +335,7 @@ h1 {
     box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4);
 }
 
-/* --- Page: Home --- */
+/* --- Page: Home (Hero Updates) --- */
 .hero {
     min-height: 100vh;
     display: flex;
@@ -350,6 +350,58 @@ h1 {
 .hero-content {
     max-width: 800px;
     z-index: 10;
+    animation: float-hero 6s ease-in-out infinite;
+    /* Floating animation */
+}
+
+@keyframes float-hero {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.hero-title {
+    font-size: 5rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 1rem;
+    letter-spacing: -0.04em;
+}
+
+@media (min-width: 768px) {
+    .hero-title {
+        font-size: 7rem;
+    }
+}
+
+.hero-tagline {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-shadow: 0 0 20px rgba(6, 182, 212, 0.6), 0 0 40px rgba(139, 92, 246, 0.4);
+    margin-bottom: 2rem;
+    background: linear-gradient(90deg, #fff, #94a3b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.glow-effect:hover {
+    box-shadow: 0 0 30px var(--accent-cyan), 0 0 60px var(--accent-violet);
+    transform: scale(1.05);
 }
 
 .hero-stats {
