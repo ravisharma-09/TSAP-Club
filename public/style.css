@@ -174,9 +174,9 @@ h1 {
 
 @media (min-width: 769px) {
 
-    /* Ensure nav actions (Login/Join) are visible on desktop */
+    /* Actions container hidden on desktop as all links are in nav-links */
     .nav-actions {
-        display: flex !important;
+        display: none !important;
     }
 
     .mobile-toggle {
@@ -186,8 +186,7 @@ h1 {
 
 @media (max-width: 768px) {
 
-    .nav-links.desktop-only,
-    .nav-actions .desktop-only {
+    .nav-links.desktop-only {
         display: none !important;
     }
 
