@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TSAP Club - Leaderboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="loading" style="text-align: center; margin-top: 40px;">Loading...</div>
+
+  <div id="content" style="display: none;">
+    <div class="card">
+      <h2>Leaderboard by Problems Solved</h2>
+      <div id="leaderboard"></div>
+    </div>
+  </div>
+
+  <script src="common.js"></script>
+  <script>
+    async function init() {
+      const user = await checkAuth();
+      if (!user) return;
+
+      renderNav("leaderboard");
+      qs("loading").style.display = "none";
+      qs("content").style.display = "block";
+
+      loadLeaderboard();
+    }
+
+    async function loadLeaderboard() {
+      try {
+        const res = await fetch(`/api/leaderboard`);
+        if (!res.ok) return;
+        const json = await res.json();
+        const leaderboard = json.data;
+        const isUpdating = json.isUpdating;
+
+        const leaderboardDiv = qs("leaderboard");
+        leaderboardDiv.innerHTML = "";
+        
+        if (isUpdating && (!leaderboard || leaderboard.length === 0)) {
+           leaderboardDiv.innerHTML = "<div style='text-align:center; padding:20px;'>Updating leaderboard data... please wait...</div>";
+           setTimeout(loadLeaderboard, 3000); // Retry
+           return;
+        }
+
+        if (!leaderboard || leaderboard.length === 0) {
+          leaderboardDiv.textContent = "No data available yet. Server might be updating.";
+          return;
+        }
+        
+        // Header
+        const header = document.createElement("div");
+        header.className = "leaderboard-item";
+        header.style.fontWeight = "bold";
+        header.style.color = "#9ca3af";
+        header.innerHTML = `
+          <div style="display:flex; gap:10px; flex:1;">
+             <span style="width:30px;">#</span>
+             <span style="flex:1;">Member</span>
+          </div>
+          <div style="width:100px; text-align:right;">Rating</div>
+          <div style="width:100px; text-align:right;">Solved</div>
+        `;
+        leaderboardDiv.appendChild(header);
+
+        leaderboard.forEach((item, index) => {
+          const div = document.createElement("div");
+          div.className = "leaderboard-item";
+          
+          // Highlight current user
+          if (item.userId === window.currentUser.id) {
+             div.style.background = "rgba(99, 102, 241, 0.1)"; 
+             div.style.borderLeft = "2px solid #6366f1";
+          }
+          
+          // Rating Color
+          let ratingColor = "#9ca3af";
+          if (item.rating >= 2400) ratingColor = "#ff0000"; // GM
+          else if (item.rating >= 2100) ratingColor = "#ff8c00"; // Master
+          else if (item.rating >= 1900) ratingColor = "#a0a"; // CM
+          else if (item.rating >= 1600) ratingColor = "#a0a"; // Expert (blue)
+          else if (item.rating >= 1400) ratingColor = "#03a89e"; // Specialist
+          else if (item.rating >= 1200) ratingColor = "#008000"; // Pupil
+          else if (item.rating > 0) ratingColor = "#808080"; // Newbie
+
+          div.innerHTML = `
+            <div style="display:flex; gap:10px; flex:1; align-items:center;">
+              <span style="color:#9ca3af; width:30px;">${index + 1}</span>
+              <div style="display:flex; flex-direction:column;">
+                <span style="font-weight:600;">${item.name}</span>
+                <span class="small" style="color:${ratingColor}">${item.handle}</span>
+              </div>
+            </div>
+            <div style="width:100px; text-align:right; font-weight:bold; color:${ratingColor}">${item.rating}</div>
+            <div style="width:100px; text-align:right;">${item.totalSolved}</div>
+          `;
+          leaderboardDiv.appendChild(div);
+        });
+        
+        const footer = document.createElement("div");
+        footer.className = "small";
+        footer.style.textAlign = "center";
+        footer.style.marginTop = "16px";
+        const date = new Date(json.updatedAt).toLocaleString();
+        footer.textContent = `Last updated: ${date} ${isUpdating ? "(Updating...)" : ""}`;
+        leaderboardDiv.appendChild(footer);
+
+        if (isUpdating) {
+           setTimeout(loadLeaderboard, 5000); // Auto refresh while updating
+        }
+
+      } catch (e) {
+        console.error(e);
+        qs("leaderboard").textContent = "Failed to load leaderboard.";
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>

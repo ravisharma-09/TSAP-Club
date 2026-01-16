@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TSAP Club - Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="loading" style="text-align: center; margin-top: 40px;">Loading...</div>
+
+  <div id="content" style="display: none;">
+    <div class="card">
+      <h2>Admin Panel</h2>
+      <div id="adminStats"></div>
+    </div>
+  </div>
+
+  <script src="common.js"></script>
+  <script>
+    async function init() {
+      const user = await checkAuth();
+      if (!user) return;
+
+      if (user.role !== "admin") {
+        window.location.href = "dashboard.html";
+        return;
+      }
+
+      renderNav("admin");
+      qs("loading").style.display = "none";
+      qs("content").style.display = "block";
+
+      loadAdminData();
+    }
+
+    async function loadAdminData() {
+      try {
+        const res = await fetch("/api/admin/members");
+        if (!res.ok) {
+            qs("adminStats").textContent = "Failed to load admin data.";
+            return;
+        }
+        const members = await res.json();
+        
+        const div = qs("adminStats");
+        div.innerHTML = `
+            <p>Total Registered Members: <strong>${members.length}</strong></p>
+            <h3>Member List</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Codeforces</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${members.map(m => `
+                        <tr>
+                            <td>${m.id}</td>
+                            <td>${m.name}</td>
+                            <td>${m.email}</td>
+                            <td>${m.role}</td>
+                            <td>${m.handles.codeforces || '-'}</td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        `;
+
+      } catch (e) {
+        console.error(e);
+        qs("adminStats").textContent = "Error loading admin data.";
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TSAP Club - Analytics</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="loading" style="text-align: center; margin-top: 40px;">Loading...</div>
+
+  <div id="content" style="display: none;">
+    <div class="grid">
+      <div class="card">
+        <h2>Codeforces Tag Strengths</h2>
+        <div id="tags"></div>
+      </div>
+
+      <div class="card">
+        <h2>Codeforces Solved Problems</h2>
+        <div style="max-height: 400px; overflow: auto;">
+          <table>
+            <thead>
+            <tr>
+              <th>Title</th>
+              <th>Rating</th>
+              <th>Tags</th>
+            </tr>
+            </thead>
+            <tbody id="solvedTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="common.js"></script>
+  <script>
+    async function init() {
+      const user = await checkAuth();
+      if (!user) return;
+
+      renderNav("analytics");
+      qs("loading").style.display = "none";
+      qs("content").style.display = "block";
+
+      loadAnalytics(user.id);
+    }
+
+    async function loadAnalytics(userId) {
+      try {
+        const res = await fetch(`/api/members/${userId}/dashboard`);
+        if (!res.ok) return;
+        const data = await res.json();
+        const cfPlatform = data.dashboard.platforms.find(p => p.platform === "codeforces");
+
+        const tagsDiv = qs("tags");
+        tagsDiv.innerHTML = "";
+        const tableBody = qs("solvedTable");
+        tableBody.innerHTML = "";
+
+        if (cfPlatform && cfPlatform.tagStrengths) {
+          cfPlatform.tagStrengths.slice(0, 30).forEach(t => {
+            const span = document.createElement("span");
+            span.className = "tag";
+            span.textContent = `${t.tag} (${t.solved})`;
+            tagsDiv.appendChild(span);
+          });
+        } else {
+          tagsDiv.textContent = "No Codeforces data available.";
+        }
+
+        if (cfPlatform && cfPlatform.solvedProblems) {
+          cfPlatform.solvedProblems.slice(0, 100).forEach(p => {
+            const tr = document.createElement("tr");
+            const tags = Array.isArray(p.tags) ? p.tags.join(", ") : "";
+            tr.innerHTML = `<td>${p.title}</td><td>${p.rating || ""}</td><td>${tags}</td>`;
+            tableBody.appendChild(tr);
+          });
+        } else {
+          tableBody.innerHTML = "<tr><td colspan='3'>No solved problems found.</td></tr>";
+        }
+
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>

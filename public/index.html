@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TSAP Club | Competitive Programming</title>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+  <!-- Background Animation -->
+  <canvas id="matrixCanvas"></canvas>
+
+  <!-- Navigation -->
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container nav-content">
+      <a href="#" class="logo">
+        <span class="text-gradient">T.S.A.P</span> CP Club
+      </a>
+
+      <!-- Desktop Links -->
+      <div class="nav-links desktop-only">
+        <a href="index.html">Home</a>
+        <a href="#join">Join Club</a>
+        <a href="#achievements">Achievements</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="#" id="loginLink">Login</a>
+      </div>
+
+      <!-- Mobile Toggle -->
+      <button class="mobile-toggle" aria-label="Toggle Menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu">
+      <a href="index.html" class="mobile-link">Home</a>
+      <a href="#join" class="mobile-link">Join Club</a>
+      <a href="#achievements" class="mobile-link">Achievements</a>
+      <a href="dashboard.html" class="mobile-link">Dashboard</a>
+      <a href="#" class="mobile-link" id="mobileLoginLink">Login</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero container">
+    <div class="hero-content">
+      <h1>
+        Master the Art of <br>
+        <span class="text-gradient">Competitive Coding</span>
+      </h1>
+      <p class="text-secondary" style="font-size: 1.25rem; margin: 1.5rem 0 2rem; max-width: 600px;">
+        Join the elite community of problem solvers. Track your progress across Codeforces, LeetCode, and CodeChef in
+        one unified dark-mode dashboard.
+      </p>
+      <div style="display: flex; gap: 1rem;">
+        <button onclick="window.location.href='dashboard.html'" class="btn btn-primary">
+          Join the Club <i data-lucide="arrow-right" style="margin-left: 0.5rem; width: 1.2rem;"></i>
+        </button>
+        <button class="btn btn-outline">View Leaderboard</button>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <h3>50+</h3>
+          <p>Members</p>
+        </div>
+        <div class="stat-item">
+          <h3>12k+</h3>
+          <p>Problems Solved</p>
+        </div>
+        <div class="stat-item">
+          <h3>Daily</h3>
+          <p>Contests</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features-section container">
+    <div class="section-header">
+      <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Platform Features</h2>
+      <p class="text-secondary">Everything you need to level up your rating.</p>
+    </div>
+
+    <div class="grid-3">
+      <!-- Feature 1 -->
+      <div class="glass-card group">
+        <div class="feature-icon">
+          <i data-lucide="bar-chart-2"></i>
+        </div>
+        <h3>Unified Analytics</h3>
+        <p class="text-secondary" style="margin-top: 0.5rem;">
+          Sync your stats from Codeforces and LeetCode automatically. Visualize your growth with heatmaps and rating
+          graphs.
+        </p>
+        <div class="tag-list">
+          <span class="tag">Analytics</span>
+          <span class="tag">Real-time</span>
+        </div>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="glass-card group">
+        <div class="feature-icon">
+          <i data-lucide="trophy"></i>
+        </div>
+        <h3>Live Leaderboard</h3>
+        <p class="text-secondary" style="margin-top: 0.5rem;">
+          Compete with peers in real-time. Our custom ranking algorithm weights problem difficulty and consistency.
+        </p>
+        <div class="tag-list">
+          <span class="tag">Competition</span>
+          <span class="tag">Ranking</span>
+        </div>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="glass-card group">
+        <div class="feature-icon">
+          <i data-lucide="zap"></i>
+        </div>
+        <h3>Smart Recommendations</h3>
+        <p class="text-secondary" style="margin-top: 0.5rem;">
+          Get AI-driven problem suggestions based on your weak topics and current rating range.
+        </p>
+        <div class="tag-list">
+          <span class="tag">AI</span>
+          <span class="tag">Learning</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="border-top: 1px solid var(--glass-border); padding: 3rem 0; margin-top: 4rem;">
+    <div class="container" style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem;">
+      <div>
+        <a href="#" class="logo" style="margin-bottom: 1rem; display: inline-block;">
+          TSAP CLUB
+        </a>
+        <p class="text-secondary">Elevating the coding culture.</p>
+      </div>
+      <div style="display: flex; gap: 2rem;">
+        <a href="#" class="text-secondary">GitHub</a>
+        <a href="#" class="text-secondary">Discord</a>
+        <a href="#" class="text-secondary">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="visuals.js"></script>
+  <script>
+    // Init Icons
+    lucide.createIcons();
+
+    // Mobile Menu Logic
+    const toggleBtn = document.querySelector('.mobile-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+
+    toggleBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('is-open');
+    });
+
+    // Close menu when clicking loop
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('is-open');
+      });
+    });
+  </script>
+</body>
+
+</html>
