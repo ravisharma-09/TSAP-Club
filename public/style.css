@@ -389,6 +389,8 @@ h1 {
 .hero-content {
     max-width: 800px;
     z-index: 10;
+    width: 100%;
+    /* Ensure it takes width to align items inside */
     animation: float-hero 6s ease-in-out infinite;
     /* Floating animation */
 }
@@ -412,6 +414,8 @@ h1 {
     margin-bottom: 1.5rem;
     letter-spacing: -0.02em;
     /* Reduced from -0.04em for cleaner look */
+    text-align: left;
+    /* Explicitly left */
 }
 
 @media (min-width: 768px) {
@@ -433,6 +437,8 @@ h1 {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     /* Standard prop */
+    text-align: left;
+    /* Explicitly left */
 }
 
 .hero-buttons {
@@ -440,7 +446,7 @@ h1 {
     gap: 1.25rem;
     margin-top: 1rem;
     flex-wrap: wrap;
-    justify-content: start;
+    justify-content: flex-start;
     /* Align left */
 }
 
@@ -460,8 +466,11 @@ h1 {
     .hero-stats {
         flex-direction: column;
         gap: 2rem;
-        align-items: center;
+        align-items: flex-start;
+        /* Align stats left on mobile? Or center? usually center on mobile, left on desktop. */
         text-align: center;
+        /* Keep center for mobile based on typical flows, or match desktop if requested 'exact'.
+                             Let's stick to left for desktop, center for mobile is safer unless specified. */
     }
 }
 
@@ -479,6 +488,8 @@ h1 {
     line-height: 1.6;
     margin-bottom: 2rem;
     max-width: 600px;
+    text-align: left;
+    /* Align description left */
 }
 
 /* Button Base for glow-button (aliasing to btn if needed or defining new) */
