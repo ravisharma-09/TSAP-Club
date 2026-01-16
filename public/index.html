@@ -20,77 +20,44 @@
   <canvas id="matrixCanvas"></canvas>
 
   <!-- Navigation -->
-  <!-- Navigation -->
+  <!-- Navbar -->
   <nav class="navbar">
-    <div class="container nav-content">
+    <div class="container navbar-container">
       <a href="#" class="logo">
-        <span class="text-gradient">T.S.A.P</span> CP Club
+        <span class="logo-icon"><i data-lucide="code-2"></i></span>
+        TSAP CLUB
       </a>
-
-      <!-- Desktop Links -->
-      <div class="nav-links desktop-only">
-        <a href="index.html">Home</a>
-        <a href="#join">Join Club</a>
-        <a href="#achievements">Achievements</a>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="#" id="loginLink">Login</a>
+      <div class="nav-links">
+        <a href="#" class="nav-item active">Home</a>
+        <a href="club-stats.html" class="nav-item">Club Stats</a>
+        <a href="#achievements" class="nav-item">Achievements</a>
+        <a href="dashboard.html" class="nav-item">Dashboard</a>
       </div>
-
-      <!-- Mobile Toggle -->
-      <button class="mobile-toggle" aria-label="Toggle Menu">
-        <i data-lucide="menu"></i>
-      </button>
+      <div class="nav-actions">
+        <a href="dashboard.html" class="nav-item">Login</a>
+        <a href="#" class="glow-button btn-primary">Join Club</a>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
     </div>
-
-    <!-- Mobile Menu Overlay -->
+    <!-- Mobile Menu -->
     <div class="mobile-menu">
-      <a href="index.html" class="mobile-link">Home</a>
-      <a href="#join" class="mobile-link">Join Club</a>
-      <a href="#achievements" class="mobile-link">Achievements</a>
-      <a href="dashboard.html" class="mobile-link">Dashboard</a>
-      <a href="#" class="mobile-link" id="mobileLoginLink">Login</a>
+      <a href="#" class="nav-item active">Home</a>
+      <a href="club-stats.html" class="nav-item">Club Stats</a>
+      <a href="#achievements" class="nav-item">Achievements</a>
+      <a href="dashboard.html" class="nav-item">Dashboard</a>
+      <a href="#" class="nav-item">Login</a>
+      <a href="#" class="glow-button btn-primary" style="margin-top: 1rem; width: 100%; text-align: center;">Join
+        Club</a>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <section class="hero container">
-    <div class="hero-content">
-      <h1 class="hero-title">
-        <span class="text-gradient">T.S.A.P</span>
-        <br />
-        CP Club
-      </h1>
-      <p class="hero-tagline">Code. Compete. Conquer.</p>
-
-      <p class="text-secondary" style="font-size: 1.25rem; margin: 1.5rem 0 2rem; max-width: 600px;">
-        Join the elite community of problem solvers. Track your progress across Codeforces, LeetCode, and CodeChef in
-        one unified dark-mode dashboard.
-      </p>
-
-      <div class="hero-actions">
-        <button onclick="window.location.href='dashboard.html'" class="btn btn-primary glow-effect">
-          Join the Club <i data-lucide="arrow-right" style="margin-left: 0.5rem; width: 1.2rem;"></i>
-        </button>
-        <button onclick="window.location.href='dashboard.html'" class="btn btn-outline glow-effect">
-          View Dashboard
-        </button>
-      </div>
-
-      <div class="hero-stats">
-        <div class="stat-item">
-          <h3>50+</h3>
-          <p>Members</p>
-        </div>
-        <div class="stat-item">
-          <h3>12k+</h3>
-          <p>Problems Solved</p>
-        </div>
-        <div class="stat-item">
-          <h3>Daily</h3>
-          <p>Contests</p>
-        </div>
-      </div>
-    </div>
+  <p>Contests</p>
+  </div>
+  </div>
+  </div>
   </section>
 
   <!-- Features Section -->
@@ -244,59 +211,18 @@
   <!-- Scripts -->
   <script src="visuals.js"></script>
   <script>
-    // Init Icons
+    // Initialize Lucide icons
     lucide.createIcons();
 
-    // Mobile Menu Logic
-    const toggleBtn = document.querySelector('.mobile-toggle');
+    // Mobile Menu Toggle
+    const menuToggle = document.querySelector('.menu-toggle');
     const mobileMenu = document.querySelector('.mobile-menu');
 
-    toggleBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('is-open');
-    });
-
-    // Close menu when clicking loop
-    document.querySelectorAll('.mobile-link').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.remove('is-open');
-      });
-    });
-  </script>
-  <script>
-    // Stats Count-up Animation
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const counter = entry.target;
-          const target = +counter.getAttribute('data-target');
-          const duration = 2000; // 2 seconds
-          const increment = target / (duration / 16); // 60fps
-
-          let current = 0;
-          const updateCounter = () => {
-            current += increment;
-            if (current < target) {
-              counter.innerText = Math.ceil(current) + (target > 100 ? '+' : '');
-              requestAnimationFrame(updateCounter);
-            } else {
-              counter.innerText = target + (target > 100 ? '+' : '');
-            }
-          };
-
-          updateCounter();
-          observer.unobserve(counter);
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.stat-number').forEach(counter => {
-      observer.observe(counter);
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('active');
+      const icon = mobileMenu.classList.contains('active') ? 'x' : 'menu';
+      menuToggle.innerHTML = `<i data-lucide="${icon}"></i>`;
+      lucide.createIcons();
     });
   </script>
 </body>
