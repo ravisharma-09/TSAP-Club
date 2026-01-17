@@ -490,6 +490,43 @@ app.get("/api/members", authMiddleware, async (req, res) => {
   res.json(list);
 });
 
+// Public endpoint for dashboard - returns member tier distribution
+app.get("/api/dashboard/members", async (req, res) => {
+  try {
+    const { INDIVIDUAL_MILESTONES } = require("./server/utils/milestones");
+    const dataSync = require("./server/services/dataSync");
+
+    // Get all members (use sample data if DB not available)
+    const members = await dataSync.getSampleMembers();
+
+    // Calculate tier distribution
+    const tiers = INDIVIDUAL_MILESTONES.map(tier => {
+      const count = members.filter(m => {
+        const problems = m.problemsSolved || 0;
+        return problems >= tier.min && problems <= tier.max;
+      }).length;
+
+      return {
+        level: tier.level,
+        badge: tier.badge,
+        color: tier.color,
+        min: tier.min,
+        max: tier.max === Infinity ? null : tier.max,
+        count: count,
+        percentage: members.length > 0 ? (count / members.length) * 100 : 0
+      };
+    });
+
+    res.json({
+      tiers,
+      totalMembers: members.length
+    });
+  } catch (error) {
+    console.error("[API] Failed to get member tiers:", error);
+    res.status(500).json({ error: "Failed to fetch member distribution" });
+  }
+});
+
 app.get("/api/members/:id/dashboard", authMiddleware, async (req, res) => {
   const id = Number(req.params.id);
   const member = await db.getUserById(id);
@@ -597,6 +634,92 @@ app.get("/api/dashboard/recommendations", async (req, res) => {
     res.status(500).json({ error: e.message || "Failed to generate recommendations" });
   }
 });
+
+// ========== NEW DATA SYNC API ENDPOINTS ==========
+
+const dataSync = require("./server/services/dataSync");
+const activityLogger = require("./server/utils/activityLogger");
+
+// Initialize sample activities
+activityLogger.initializeSampleActivities();
+
+/**
+ * GET /api/club/stats
+ * Public endpoint - Returns aggregated club-level statistics
+ */
+app.get("/api/club/stats", async (req, res) => {
+  try {
+    const clubData = await dataSync.getClubData(db);
+    res.json(clubData);
+  } catch (e) {
+    console.error("[API] Failed to get club stats:", e);
+    res.status(500).json({ error: "Failed to fetch club statistics" });
+  }
+});
+
+/**
+ * GET /api/member/:id/stats
+ * Protected endpoint - Returns member-level data with milestone
+ */
+app.get("/api/member/:id/stats", authMiddleware, async (req, res) => {
+  try {
+    const memberId = req.params.id;
+
+    // Only allow users to view their own data (or admins can view anyone)
+    if (req.user.id !== memberId && req.user.role !== "admin") {
+      return res.status(403).json({ error: "Forbidden" });
+    }
+
+    const memberData = await dataSync.getMemberDataWithMilestone(db, memberId);
+    res.json(memberData);
+  } catch (e) {
+    console.error(`[API] Failed to get member stats for ${req.params.id}:`, e);
+    res.status(404).json({ error: "Member not found" });
+  }
+});
+
+/**
+ * GET /api/activity/recent
+ * Public endpoint - Returns recent activity feed
+ */
+app.get("/api/activity/recent", (req, res) => {
+  try {
+    const limit = parseInt(req.query.limit) || 10;
+    const activities = activityLogger.getRecentActivities(limit);
+    res.json(activities);
+  } catch (e) {
+    console.error("[API] Failed to get recent activities:", e);
+    res.status(500).json({ error: "Failed to fetch activities" });
+  }
+});
+
+/**
+ * POST /api/sync/trigger
+ * Admin-only endpoint - Manually trigger full sync
+ */
+app.post("/api/sync/trigger", authMiddleware, adminMiddleware, async (req, res) => {
+  try {
+    console.log(`[API] Manual sync triggered by ${req.user.name}`);
+    const clubData = await dataSync.performFullSync(db);
+    res.json({
+      success: true,
+      message: "Sync completed successfully",
+      data: clubData
+    });
+  } catch (e) {
+    console.error("[API] Manual sync failed:", e);
+    res.status(500).json({ error: "Sync failed" });
+  }
+});
+
+// Trigger initial sync on startup
+setTimeout(() => {
+  console.log("[Sync] Triggering initial sync...");
+  dataSync.performFullSync(db).catch(console.error);
+}, 3000);
+
+// ========== END NEW API ENDPOINTS ==========
+
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));

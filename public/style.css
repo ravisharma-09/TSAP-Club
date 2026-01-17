@@ -993,3 +993,856 @@ th {
 tr:last-child td {
     border-bottom: none;
 }
+/* ===================================
+   PUBLIC DASHBOARD STYLES
+   =================================== */
+
+/* Dashboard Hero Section */
+.dashboard-hero {
+  padding: 8rem 0 4rem;
+  text-align: center;
+}
+
+.dashboard-hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dashboard-icon {
+  width: 64px;
+  height: 64px;
+  background: rgba(139, 92, 246, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-violet);
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-icon i {
+  width: 32px;
+  height: 32px;
+}
+
+.dashboard-hero h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-hero p {
+  font-size: 1.1rem;
+}
+
+/* Club Stats Section */
+.club-stats-section {
+  padding: 2rem 0 4rem;
+}
+
+.stats-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.stat-card {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(6, 182, 212, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-cyan);
+  margin: 0 auto 1rem;
+}
+
+.stat-icon i {
+  width: 24px;
+  height: 24px;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #fff 0%, var(--accent-cyan) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Milestones Section */
+.milestones-section {
+  padding: 4rem 0;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.timeline-container {
+  padding: 3rem 2rem;
+  overflow-x: auto;
+}
+
+.timeline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  min-width: 800px;
+}
+
+.milestone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.milestone-marker {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.milestone.completed .milestone-marker {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: #10b981;
+  color: #10b981;
+}
+
+.milestone.current .milestone-marker {
+  background: rgba(59, 130, 246, 0.2);
+  border-color: #3b82f6;
+  color: #3b82f6;
+}
+
+.milestone-marker.pulse {
+  animation: pulse-ring 2s infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
+}
+
+.milestone-content {
+  text-align: center;
+}
+
+.milestone-number {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.milestone-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 99px;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.milestone-badge.achieved {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.milestone-badge.next {
+  background: rgba(59, 130, 246, 0.2);
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.milestone-date {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.timeline-line {
+  width: 80px;
+  height: 2px;
+  background: var(--glass-border);
+  margin: 0 1rem 2rem;
+}
+
+.timeline-line.completed {
+  background: linear-gradient(90deg, #10b981, #10b981);
+}
+
+/* Members Section */
+.members-section {
+  padding: 4rem 0;
+}
+
+.members-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.member-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.member-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-violet);
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.3);
+}
+
+.member-avatar {
+  margin-bottom: 1rem;
+}
+
+.avatar-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--brand-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: white;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+}
+
+.member-name {
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+}
+
+.member-role {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 99px;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.member-role.admin {
+  background: rgba(139, 92, 246, 0.2);
+  color: var(--accent-violet);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.member-role.member {
+  background: rgba(6, 182, 212, 0.2);
+  color: var(--accent-cyan);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+.member-stats {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.platform-stat {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.platform-stat i {
+  width: 16px;
+  height: 16px;
+}
+
+.member-joined {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+/* Activity Section */
+.activity-section {
+  padding: 4rem 0;
+}
+
+.activity-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.activity-item:hover {
+  transform: translateX(5px);
+  border-left: 3px solid var(--accent-cyan);
+}
+
+.activity-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.activity-icon i {
+  width: 24px;
+  height: 24px;
+}
+
+.milestone-icon {
+  background: rgba(245, 158, 11, 0.2);
+  color: #f59e0b;
+}
+
+.growth-icon {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+}
+
+.achievement-icon {
+  background: rgba(59, 130, 246, 0.2);
+  color: #3b82f6;
+}
+
+.streak-icon {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+.activity-content {
+  flex: 1;
+}
+
+.activity-message {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.activity-time {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-hero {
+    padding: 6rem 0 3rem;
+  }
+
+  .dashboard-hero h1 {
+    font-size: 2rem;
+  }
+
+  .stats-grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline {
+    flex-direction: column;
+    min-width: auto;
+  }
+
+  .timeline-line {
+    width: 2px;
+    height: 40px;
+    margin: 0.5rem 0;
+  }
+
+  .members-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .activity-item {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* ===================================
+   ENHANCED MILESTONE STYLES
+   =================================== */
+
+/* Section subtitle */
+.section-subtitle {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-top: -1rem;
+  margin-bottom: 2rem;
+}
+
+/* Milestone reward icon */
+.milestone-reward-icon {
+  font-size: 3rem;
+  margin-bottom: 0.75rem;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  transition: all 0.3s ease;
+}
+
+/* Achieved milestone glow effect */
+.milestone.completed .milestone-reward-icon {
+  animation: celebrate-glow 2s ease-in-out infinite;
+}
+
+@keyframes celebrate-glow {
+  0%, 100% {
+    filter: drop-shadow(0 4px 8px rgba(16, 185, 129, 0.3));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 6px 12px rgba(16, 185, 129, 0.5));
+    transform: scale(1.05);
+  }
+}
+
+/* Current milestone pulse glow */
+.milestone.current .milestone-reward-icon {
+  animation: pulse-reward 2s ease-in-out infinite;
+}
+
+@keyframes pulse-reward {
+  0%, 100% {
+    filter: drop-shadow(0 4px 8px rgba(59, 130, 246, 0.4));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 8px 16px rgba(59, 130, 246, 0.6));
+    transform: scale(1.1);
+  }
+}
+
+/* Locked/future milestone (dimmed) */
+.milestone.locked {
+  opacity: 0.4;
+}
+
+.milestone.locked .milestone-marker {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.05);
+  color: var(--text-secondary);
+}
+
+.milestone.locked .milestone-reward-icon {
+  filter: grayscale(100%) opacity(0.5);
+}
+
+/* Milestone reward label */
+.milestone-reward {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0.5rem 0 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.milestone.completed .milestone-reward {
+  color: #10b981;
+  text-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+}
+
+.milestone.current .milestone-reward {
+  color: #3b82f6;
+  text-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+}
+
+/* Enhanced milestone marker for completed */
+.milestone.completed .milestone-marker {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1));
+  border-color: #10b981;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+}
+
+/* Enhanced milestone marker for current */
+.milestone.current .milestone-marker {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.1));
+  border-color: #3b82f6;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+}
+
+/* Milestone number enhancement */
+.milestone.completed .milestone-number {
+  background: linear-gradient(135deg, #10b981, #059669);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.milestone.current .milestone-number {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Timeline line enhancement for completed */
+.timeline-line.completed {
+  background: linear-gradient(90deg, #10b981 0%, #10b981 100%);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+  height: 3px;
+}
+
+/* Hover effect on completed milestones */
+.milestone.completed:hover .milestone-reward-icon {
+  transform: scale(1.15) rotate(5deg);
+  filter: drop-shadow(0 8px 16px rgba(16, 185, 129, 0.6));
+}
+
+/* Celebration sparkle effect (optional) */
+.milestone.completed .milestone-content::before {
+  content: '✨';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 1.5rem;
+  opacity: 0;
+  animation: sparkle 3s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0.5) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+  }
+}
+
+/* Responsive adjustments for rewards */
+@media (max-width: 768px) {
+  .milestone-reward-icon {
+    font-size: 2rem;
+  }
+  
+  .milestone-reward {
+    font-size: 0.75rem;
+  }
+}
+
+
+/* ========== INDIVIDUAL ACHIEVEMENTS SECTION ========== */
+
+.achievements-section {
+    padding: 6rem 0;
+}
+
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+@media (max-width: 1024px) {
+    .achievements-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .achievements-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.achievement-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem 1.5rem !important;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Tier-Specific Glow Effects */
+.achievement-card.tier-beginner {
+    border-color: rgba(107, 114, 128, 0.3);
+}
+
+.achievement-card.tier-beginner:hover {
+    border-color: rgba(107, 114, 128, 0.6);
+    box-shadow: 0 8px 32px rgba(107, 114, 128, 0.2);
+}
+
+.achievement-card.tier-bronze-solver {
+    border-color: rgba(205, 127, 50, 0.3);
+}
+
+.achievement-card.tier-bronze-solver:hover {
+    border-color: rgba(205, 127, 50, 0.6);
+    box-shadow: 0 8px 32px rgba(205, 127, 50, 0.3);
+}
+
+.achievement-card.tier-silver-solver {
+    border-color: rgba(192, 192, 192, 0.3);
+}
+
+.achievement-card.tier-silver-solver:hover {
+    border-color: rgba(192, 192, 192, 0.6);
+    box-shadow: 0 8px 32px rgba(192, 192, 192, 0.3);
+}
+
+.achievement-card.tier-gold-solver {
+    border-color: rgba(255, 215, 0, 0.3);
+}
+
+.achievement-card.tier-gold-solver:hover {
+    border-color: rgba(255, 215, 0, 0.6);
+    box-shadow: 0 8px 32px rgba(255, 215, 0, 0.3);
+}
+
+.achievement-card.tier-platinum-solver {
+    border-color: rgba(0, 212, 255, 0.3);
+}
+
+.achievement-card.tier-platinum-solver:hover {
+    border-color: rgba(0, 212, 255, 0.6);
+    box-shadow: 0 8px 32px rgba(0, 212, 255, 0.3);
+}
+
+.achievement-card.tier-diamond-solver {
+    border-color: rgba(0, 191, 255, 0.3);
+}
+
+.achievement-card.tier-diamond-solver:hover {
+    border-color: rgba(0, 191, 255, 0.6);
+    box-shadow: 0 8px 32px rgba(0, 191, 255, 0.3);
+}
+
+.achievement-card.tier-master-solver {
+    border-color: rgba(155, 89, 182, 0.3);
+    background: linear-gradient(135deg, rgba(155, 89, 182, 0.03), rgba(255, 215, 0, 0.02));
+}
+
+.achievement-card.tier-master-solver:hover {
+    border-color: rgba(155, 89, 182, 0.6);
+    box-shadow: 0 8px 32px rgba(155, 89, 182, 0.4), 0 0 20px rgba(255, 215, 0, 0.2);
+}
+
+.achievement-badge {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+}
+
+.achievement-level {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+}
+
+.achievement-requirement {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.achievement-count {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.count-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #fff 0%, var(--accent-cyan) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+}
+
+.count-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.25rem;
+}
+
+.achievement-progress-container {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 99px;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+}
+
+.achievement-progress-bar {
+    height: 100%;
+    width: 0;
+    background: var(--brand-gradient);
+    border-radius: 99px;
+    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+}
+
+.achievement-progress-bar.animate {
+    width: var(--progress);
+}
+
+.achievement-percentage {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* Hover lift effect for all achievement cards */
+.achievement-card:hover {
+    transform: translateY(-8px);
+}
+
+/* ========== MEMBER CARD ACHIEVEMENT ENHANCEMENTS ========== */
+
+.member-achievement {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    margin: 1rem 0 0.5rem 0;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.achievement-badge-small {
+    font-size: 2rem;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+    flex-shrink: 0;
+}
+
+.achievement-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1;
+}
+
+.achievement-tier {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+}
+
+.achievement-problems {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.member-progress {
+    margin-top: 0.75rem;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.progress-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.progress-count {
+    font-size: 0.75rem;
+    color: var(--accent-cyan);
+    font-weight: 600;
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--brand-gradient);
+    border-radius: 99px;
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 8px rgba(6, 182, 212, 0.4);
+}
+
+/* Enhance member card hover with achievement glow */
+.member-card:hover .member-achievement {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(139, 92, 246, 0.3);
+}
+
+.member-card:hover .progress-bar-fill {
+    box-shadow: 0 0 12px rgba(6, 182, 212, 0.6);
+}
