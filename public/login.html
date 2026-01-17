@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | TSAP Club</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <!-- Background Animation -->
+    <canvas id="matrixCanvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon"><i data-lucide="code-2"></i></span>
+                T.S.A.P CP Club
+            </a>
+            <div class="nav-links desktop-only">
+                <a href="index.html" class="nav-item">Home</a>
+                <a href="dashboard.html" class="nav-item">Dashboard</a>
+                <a href="login.html" class="nav-item active">Login</a>
+            </div>
+            <div class="nav-actions">
+                <button class="menu-toggle" aria-label="Toggle menu">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
+            <a href="index.html" class="nav-item">Home</a>
+            <a href="dashboard.html" class="nav-item">Dashboard</a>
+            <a href="login.html" class="nav-item active">Login</a>
+        </div>
+    </nav>
+
+    <!-- Auth Container -->
+    <div class="auth-container">
+        <div class="auth-card glass-card">
+            <!-- Login Form -->
+            <form id="loginForm" class="auth-form active">
+                <h2 class="form-title">Welcome Back</h2>
+                <p class="form-subtitle text-secondary">Sign in to access your dashboard</p>
+
+                <div class="form-group">
+                    <label for="loginEmail" class="form-label">Email</label>
+                    <input type="email" id="loginEmail" class="form-input" placeholder="your@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword" class="form-label">Password</label>
+                    <div style="position: relative;">
+                        <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" required>
+                        <button type="button" id="togglePassword"
+                            style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--text-secondary); padding: 4px; display: flex; align-items: center;"
+                            aria-label="Toggle password visibility">
+                            <i data-lucide="eye" style="width: 20px; height: 20px;"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <p class="text-secondary"
+                    style="font-size: 0.85rem; margin-top: -0.5rem; margin-bottom: 1rem; text-align: center;">
+                    New members are onboarded via club approval.
+                </p>
+
+                <div class="form-error" id="loginError"></div>
+
+                <button type="submit" class="btn glow-button btn-primary" style="width: 100%;">
+                    <span>Sign In</span>
+                    <i data-lucide="log-in" style="width: 1.2rem; margin-left: 0.5rem;"></i>
+                </button>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="visuals.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mobileMenu = document.querySelector('.mobile-menu');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            const icon = mobileMenu.classList.contains('active') ? 'x' : 'menu';
+            menuToggle.innerHTML = `<i data-lucide="${icon}"></i>`;
+            lucide.createIcons();
+        });
+
+        // Password Visibility Toggle
+        const togglePasswordBtn = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('loginPassword');
+
+        togglePasswordBtn.addEventListener('click', () => {
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+
+            // Toggle icon between eye and eye-off
+            const icon = togglePasswordBtn.querySelector('i');
+            const iconName = type === 'password' ? 'eye' : 'eye-off';
+            icon.setAttribute('data-lucide', iconName);
+            lucide.createIcons();
+        });
+
+        // Login Form Handler
+        const loginForm = document.getElementById('loginForm');
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const errorEl = document.getElementById('loginError');
+
+            errorEl.textContent = '';
+
+            try {
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Login failed');
+                }
+
+                // Success - redirect to profile
+                window.location.href = 'profile.html';
+            } catch (error) {
+                errorEl.textContent = error.message;
+            }
+        });
+
+
+
+        // Redirect if already logged in
+        redirectIfAuthenticated();
+    </script>
+</body>
+
+</html>

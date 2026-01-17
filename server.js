@@ -389,40 +389,9 @@ async function aggregateStatsForHandles(handles) {
 }
 
 app.post("/api/auth/register", async (req, res) => {
-  const { name, email, password, codeforces, leetcode, codechef } = req.body || {};
-  if (!name || !email || !password) {
-    return res.status(400).json({ error: "Name, email and password are required" });
-  }
-
-  const existing = await db.getUserByEmail(email);
-  if (existing) {
-    return res.status(400).json({ error: "Email already registered" });
-  }
-
-  // First user is admin logic: check if any users exist
-  const allUsers = await db.getAllUsers();
-  const role = allUsers.length === 0 ? "admin" : "member";
-
-  const newUser = await db.createUser({
-    name,
-    email,
-    passwordHash: hashPassword(password),
-    role,
-    handles: {
-      codeforces: codeforces || "",
-      leetcode: leetcode || "",
-      codechef: codechef || ""
-    }
-  });
-
-  const token = await db.createSession(newUser.id);
-  setSessionCookie(res, token);
-  res.json({
-    id: newUser.id,
-    name: newUser.name,
-    email: newUser.email,
-    role: newUser.role,
-    handles: newUser.handles
+  // Registration is disabled - users must be created by admin
+  return res.status(403).json({
+    error: "Registration is disabled. Please contact the club admin for account creation."
   });
 });
 

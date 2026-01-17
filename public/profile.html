@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | TSAP Club</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <!-- Background Animation -->
+    <canvas id="matrixCanvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon"><i data-lucide="code-2"></i></span>
+                T.S.A.P CP Club
+            </a>
+            <div class="nav-links desktop-only">
+                <a href="index.html" class="nav-item">Home</a>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScMBkN6E3mqvOYs9lWYav1lJfgvjLX-mVqycmUPIYdgJL_bQg/viewform?usp=dialog"
+                    target="_blank" class="nav-item">Join Club</a>
+                <a href="achievements.html" class="nav-item">Achievements</a>
+                <a href="dashboard.html" class="nav-item">Dashboard</a>
+                <a href="login.html" class="nav-item">Login</a>
+            </div>
+            <div class="nav-actions">
+                <button class="menu-toggle" aria-label="Toggle menu">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
+            <a href="index.html" class="nav-item">Home</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScMBkN6E3mqvOYs9lWYav1lJfgvjLX-mVqycmUPIYdgJL_bQg/viewform?usp=dialog"
+                target="_blank" class="nav-item">Join Club</a>
+            <a href="achievements.html" class="nav-item">Achievements</a>
+            <a href="dashboard.html" class="nav-item">Dashboard</a>
+            <a href="login.html" class="nav-item">Login</a>
+        </div>
+    </nav>
+
+    <!-- Profile Container -->
+    <div class="auth-container" style="padding-top: 8rem;">
+        <div class="glass-card" style="max-width: 600px; margin: 0 auto;">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <div style="width: 100px; height: 100px; margin: 0 auto 1rem; background: var(--brand-gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: 800; color: white; box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);"
+                    id="userAvatar">
+                    --
+                </div>
+                <h1 id="userName" style="font-size: 2rem; margin-bottom: 0.5rem;">Loading...</h1>
+                <p id="userEmail" class="text-secondary" style="font-size: 1rem;">Loading...</p>
+            </div>
+
+            <div style="border-top: 1px solid var(--glass-border); padding-top: 2rem;">
+                <h2 style="font-size: 1.25rem; margin-bottom: 1.5rem; color: var(--text-primary);">
+                    <i data-lucide="link"
+                        style="width: 1.2rem; height: 1.2rem; margin-right: 0.5rem; vertical-align: middle;"></i>
+                    Platform Handles
+                </h2>
+
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <!-- Codeforces -->
+                    <div class="glass-card" style="padding: 1rem; display: flex; align-items: center; gap: 1rem;">
+                        <div
+                            style="width: 40px; height: 40px; background: rgba(6, 182, 212, 0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                            <i data-lucide="code" style="width: 1.5rem; height: 1.5rem; color: var(--accent-cyan);"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">
+                                Codeforces</div>
+                            <div id="codeforcesHandle" class="text-secondary" style="font-size: 0.9rem;">Not set</div>
+                        </div>
+                    </div>
+
+                    <!-- LeetCode -->
+                    <div class="glass-card" style="padding: 1rem; display: flex; align-items: center; gap: 1rem;">
+                        <div
+                            style="width: 40px; height: 40px; background: rgba(139, 92, 246, 0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                            <i data-lucide="terminal"
+                                style="width: 1.5rem; height: 1.5rem; color: var(--accent-violet);"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">LeetCode
+                            </div>
+                            <div id="leetcodeHandle" class="text-secondary" style="font-size: 0.9rem;">Not set</div>
+                        </div>
+                    </div>
+
+                    <!-- CodeChef -->
+                    <div class="glass-card" style="padding: 1rem; display: flex; align-items: center; gap: 1rem;">
+                        <div
+                            style="width: 40px; height: 40px; background: rgba(6, 182, 212, 0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                            <i data-lucide="cpu" style="width: 1.5rem; height: 1.5rem; color: var(--accent-cyan);"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">CodeChef
+                            </div>
+                            <div id="codechefHandle" class="text-secondary" style="font-size: 0.9rem;">Not set</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="border-top: 1px solid var(--glass-border); padding: 3rem 0; margin-top: 4rem;">
+        <div class="container" style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem;">
+            <div>
+                <a href="index.html" class="logo" style="margin-bottom: 1rem; display: inline-block;">
+                    TSAP CLUB
+                </a>
+                <p class="text-secondary">Elevating the coding culture.</p>
+            </div>
+            <div style="display: flex; gap: 2rem;">
+                <a href="#" class="text-secondary">GitHub</a>
+                <a href="#" class="text-secondary">Discord</a>
+                <a href="#" class="text-secondary">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="visuals.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mobileMenu = document.querySelector('.mobile-menu');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            const icon = mobileMenu.classList.contains('active') ? 'x' : 'menu';
+            menuToggle.innerHTML = `<i data-lucide="${icon}"></i>`;
+            lucide.createIcons();
+        });
+
+        // Require authentication - redirect to login if not logged in
+        requireAuth();
+
+        // Load and display user profile
+        async function loadUserProfile() {
+            try {
+                const user = await getCurrentUser();
+
+                if (!user) {
+                    // Not logged in, requireAuth should have redirected
+                    return;
+                }
+
+                // Get user initials
+                const initials = user.name.split(' ').map(n => n[0]).join('').toUpperCase();
+
+                // Update profile display
+                document.getElementById('userAvatar').textContent = initials;
+                document.getElementById('userName').textContent = user.name;
+                document.getElementById('userEmail').textContent = user.email;
+
+                // Update platform handles
+                if (user.handles) {
+                    if (user.handles.codeforces) {
+                        document.getElementById('codeforcesHandle').textContent = user.handles.codeforces;
+                    }
+                    if (user.handles.leetcode) {
+                        document.getElementById('leetcodeHandle').textContent = user.handles.leetcode;
+                    }
+                    if (user.handles.codechef) {
+                        document.getElementById('codechefHandle').textContent = user.handles.codechef;
+                    }
+                }
+            } catch (error) {
+                console.error('[Profile] Failed to load user data:', error);
+                // Redirect to login on error
+                window.location.href = 'login.html';
+            }
+        }
+
+        // Load profile data
+        loadUserProfile();
+    </script>
+</body>
+
+</html>
